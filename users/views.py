@@ -8,6 +8,10 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 from .models import User
 from .serializers import MyTokenObtainPairSerializer, MyUserSerializer
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 class MyTokenObtainPairSerializer(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
@@ -22,6 +26,7 @@ def register(request):
         )
         serializer = MyUserSerializer(user, many=False)
         return Response(serializer.data)
-    except:
+    except Exception as e:
+        logger.warning(f"POST Request to register failed: {e}")
         message = {'detail': 'Something went wrong'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
