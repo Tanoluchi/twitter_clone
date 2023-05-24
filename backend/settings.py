@@ -1,6 +1,9 @@
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-l#*3*)6slgpbq%7ng90(ybx_01g8^_kumghy-t$6p9p_kfa*&l'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -133,6 +136,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173' # Local
 ]
 
+CORS_ALLOW_CREDENTIALS = True
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME':  timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(minutes=30),
@@ -142,7 +147,7 @@ SIMPLE_JWT = {
 
     'ALGORITHM': 'HS256',
 
-    'VERIFYING_KEY': None,
+    'VERIFYING_KEY': SECRET_KEY,
     'AUDIENCE': None,
     'ISSUER': None,
     'JWK_URL': None,
@@ -161,8 +166,6 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=1),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(minutes=1),
 }
 
 REST_FRAMEWORK = {
