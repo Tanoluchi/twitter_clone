@@ -1,19 +1,24 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { LoginPage, Feed, RegisterPage, UserProfilePage } from './pages';
 import { PrivateRoute } from './components';
+import { Layout } from './components/Layout';
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PrivateRoute />}>
-          <Route path="/:username" element={<UserProfilePage />} />
-          <Route path="/" element={<Feed />} />
+
+        <Route path='/' element={<Layout />} >
+          <Route element={<PrivateRoute />}>
+            <Route path="/:username" element={<UserProfilePage />} />
+            <Route path="/" element={<Feed />} />
+          </Route>
         </Route>
-    
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+
       </Routes>
     </BrowserRouter>
   )

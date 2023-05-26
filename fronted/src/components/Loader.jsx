@@ -1,5 +1,5 @@
 
-const Loader = () => (
+export const Loader = () => (
     <div className="flex min-h-full items-center justify-center py-14">
         <div className="m-5 p-10">
             <div className="w-full max-w-md space-y-8">
@@ -10,5 +10,3 @@ const Loader = () => (
         </div>
     </div>
 );
-
-export default Loader;

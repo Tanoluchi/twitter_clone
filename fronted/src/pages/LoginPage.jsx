@@ -3,7 +3,7 @@ import { loginRequest } from '../api/users';
 import { Formik, Field, Form } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import { BsTwitter } from 'react-icons/bs';
-import Loader from "../components/Loader";
+import { Loader } from "../components";
 
 export const LoginPage = () => {
 

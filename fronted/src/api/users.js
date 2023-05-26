@@ -1,10 +1,15 @@
-import { axi } from './useAxios';
+import { authAxios, axi } from './useAxios';
 import jwt_decode from 'jwt-decode';
+
+export const updateProfile = async (data) => {
+    await authAxios.put(`/users/${localStorage.getItem('username')}/`, data);
+}
 
 export const userProfile = async (username) => {
     const res = await axi.get(`/users/${username}`);
     return res.data;
 }
+
 export const logout = () => {
     localStorage.clear();
 }
