@@ -1,12 +1,26 @@
 import { authAxios, axi } from './useAxios';
 import jwt_decode from 'jwt-decode';
 
+export const follow = async (username) => {
+    await authAxios.post(`/users/${username}/follow/`);
+};
+
+export const recommendations = async () => {
+    const res = await authAxios.get('/users/recommendations/');
+    return res.data;
+}
+
+export const searchQuery = async(query) => {
+    const res = await authAxios.get(`/users/search/?query=${query}/`);
+    return res.data;
+}
+
 export const updateProfile = async (data) => {
     await authAxios.put(`/users/${localStorage.getItem('username')}/`, data);
 }
 
 export const userProfile = async (username) => {
-    const res = await axi.get(`/users/${username}`);
+    const res = await authAxios.get(`/users/${username}/`);
     return res.data;
 }
 

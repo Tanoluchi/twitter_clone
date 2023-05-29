@@ -13,13 +13,13 @@ export const authAxios = axios.create({
 });
 
 authAxios.interceptors.request.use(async (config) => {
-    const accessToken = localStorage.getItem('access');
+    const access = localStorage.getItem('access');
 
     config.headers = {
-        'Authorization': `Bearer ${accessToken}`,
+        'Authorization': `Bearer ${access}`,
     }
 
-    const decoded = jwt_decode(accessToken);
+    const decoded = jwt_decode(access);
 
     const expire = new Date(decoded.exp * 1000);
     const now = new Date();

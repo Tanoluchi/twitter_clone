@@ -7,14 +7,14 @@ import { RiHome7Fill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import { SidebarLink } from './SidebarLink';
 
-const SideBar = () => {
+export const SideBar = () => {
     const username = localStorage.getItem('username');
 
     return (
         <div className='sm:flex flex-col items-center xl:items-start xl:w[340px] p-2 fixed h-full'>
             <div className='space-y-2.5 mt-3 mb-2.5 xl:ml-24'>
                 <BsTwitter size={28} className='ml-4 mb-2' />
-                <SidebarLink link="/home" text="Home" Icon={<RiHome7Fill size={28} />} /> 
+                <SidebarLink link="/" text="Home" Icon={<RiHome7Fill size={28} />} /> 
                 <SidebarLink link={username} text="Profile" Icon={<BsPersonFill size={28} />} />
                 <SidebarLink link="/chat" text="Chat" Icon={<HiOutlineEnvelope size={28} />} />
                 <SidebarLink link="/notification" text="Notifications" Icon={<IoIosNotificationsOutline size={28} />} />
@@ -27,5 +27,3 @@ const SideBar = () => {
         </div>
     )
 }
-
-export default SideBar

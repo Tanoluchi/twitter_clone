@@ -6,16 +6,28 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { IoMdCalendar } from "react-icons/io";
 import { EditProfile, Loader} from "../components";
 import toast from "react-hot-toast"
+import {MyTweets, MyLikes, MyRe, MyMedia, FollowBtn} from "../components"
+// import { getUserTweets } from "../api/tweets"
 
 export const UserProfilePage = () => {
     const { username } = useParams()
+    const myUser = localStorage.getItem('username')
 
     const [isEditing, setIsEditing] = useState(false)
+    const [show, setShow] = useState(0)
 
     const { data: user, isLoading: loadingUser , isError: isErrorUser } = useQuery({
         queryKey: ['user', username],
         queryFn: () => userProfile(username),
     })
+
+    // const { data: tweets, isLoading: loadingTweets, isError: isErrorTweets, error: errorTweets } = useQuery({
+    //     queryFn: () => getUserTweets(username),
+    //     queryKey: ['user_tweets']
+    // })
+
+    // if(loadingTweets) return <div>Loading...</div>
+    // if(isErrorTweets) return <div>Error: {errorTweets.message}</div>
 
     if (loadingUser ) return <Loader/>
     if (isErrorUser ) return toast.error('Error')
@@ -75,9 +87,7 @@ export const UserProfilePage = () => {
             ) : (
 
                 <>
-                    {user.i_follow} ? {
-                        <button></button>
-                    }
+                    <FollowBtn user={user} page={true}/>
                 </>
 
             )}
@@ -136,10 +146,10 @@ export const UserProfilePage = () => {
 
         </div>
 
-        {/* {show === 0 && <MyTweets user={user} tweets={tweets} myUser={myUser} />}
+        {show === 0 && <MyTweets user={user} tweets={tweets} myUser={myUser} />}
         {show === 1 && <MyRe user={user} />}
         {show === 2 && <MyMedia tweets={tweets} />}
-        {show === 3 && <MyLikes user={user} />} */}
+        {show === 3 && <MyLikes user={user} />}
 
     </>
     )

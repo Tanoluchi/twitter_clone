@@ -28,7 +28,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=255, unique=True)
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255, blank=True)
-    following = models.ManyToManyField('self', symmetrical=False, related_name="Followed", blank=True)
+    following = models.ManyToManyField('self', symmetrical=False, related_name="followed", blank=True)
     bio = models.TextField(max_length=255, blank=True)
     avatar = models.ImageField(default='user.png')
     cover_image = models.ImageField(default='cover.png')

@@ -2,6 +2,12 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import User
 
+class SearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'avatar']
+
+
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.ReadOnlyField()
     username = serializers.ReadOnlyField()

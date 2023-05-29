@@ -2,6 +2,7 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useFormik } from 'formik';
 import { updateProfile } from '../api/users';
 import toast from 'react-hot-toast';
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 export const EditProfile = ({user, close}) => {
     const queryClient = useQueryClient();
