@@ -1,11 +1,11 @@
 import { AiOutlineMessage, AiFillEdit } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
-// import { deleteTweet } from "../api/tweets";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Loader, Like } from "./";
-// import EditTweet from "./EditTweet";
+import { deleteTweet } from "../api/tweets";
 import { useState } from "react";
+import { EditTweet } from "./";
 
 export const MyTweets = ({ user, myUser, tweets }) => {
 
@@ -13,18 +13,18 @@ export const MyTweets = ({ user, myUser, tweets }) => {
     const [isEditing, setIsEditing] = useState(false)
     const userId = localStorage.getItem('user_id')
 
-    // const deleteTweetMutation = useMutation({
-    //     mutationFn: deleteTweet,
-    //     onSuccess: () => {
-    //         queryClient.invalidateQueries(["tweets", user.username])
-    //         toast.success("Tweet deleted successfully")
-    //     },
-    //     onError: (error) => {
-    //         toast.error(error.message)
-    //     }
-    // })
+    const deleteTweetMutation = useMutation({
+        mutationFn: deleteTweet,
+        onSuccess: () => {
+            queryClient.invalidateQueries(["tweets", user.username])
+            toast.success("Tweet deleted successfully")
+        },
+        onError: (error) => {
+            toast.error(error.message)
+        }
+    })
 
-    // if(deleteTweetMutation.isLoading) return <Loader/>
+    if(deleteTweetMutation.isLoading) return <Loader/>
 
     return (
         <>
@@ -65,7 +65,7 @@ export const MyTweets = ({ user, myUser, tweets }) => {
             </div>
 
             <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500">
-                <Like t={t} user={userId} />
+                <Like tweet={t} user={userId} />
                 <p>
                     {t.likes_count}
                 </p>
@@ -75,17 +75,17 @@ export const MyTweets = ({ user, myUser, tweets }) => {
                     <div 
                     className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500">
                     <BsFillTrashFill  
-                        // onClick={() => deleteTweetMutation.mutate(t.id)}
+                        onClick={() => deleteTweetMutation.mutate(t.id)}
                         size={20} />
                     </div>
 
-                <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-yellow-300">
-                    <AiFillEdit 
-                        onClick={() => setIsEditing(true)}
-                        size={25} />
-                </div>
+                    <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-yellow-300">
+                        <AiFillEdit 
+                            onClick={() => setIsEditing(true)}
+                            size={25} />
+                    </div>
 
-        {/* {isEditing && (<EditTweet tweet={t} close={() => setIsEditing(false)} />)} */}
+                    {isEditing && (<EditTweet tweet={t} close={() => setIsEditing(false)} />)}
                 </>
             )}
             </div>

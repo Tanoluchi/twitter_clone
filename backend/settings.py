@@ -136,6 +136,7 @@ AUTH_USER_MODEL = 'users.User'
 
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173', # Local
+    'http://localhost:5173', # Local
 ]
 
 CORS_ALLOW_CREDENTIALS = True

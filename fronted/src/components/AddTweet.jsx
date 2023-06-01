@@ -34,7 +34,7 @@ export const AddTweet = () => {
         onSubmit: (values, {resetForm}) => {
             const { content, image } = values;
             const formData = new FormData();
-            
+
             formData.append('content', content);
             if (image) {
                 formData.append('image', image)

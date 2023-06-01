@@ -12,3 +12,4 @@ export * from './FollowBtn';
 export * from './SideBar';
 export * from './MyLikes';
 export * from './AddTweet';
+export * from './EditTweet';

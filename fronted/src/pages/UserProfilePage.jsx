@@ -4,10 +4,9 @@ import { useQuery } from "@tanstack/react-query"
 import { userProfile } from "../api/users"
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { IoMdCalendar } from "react-icons/io";
-import { EditProfile, Loader} from "../components";
 import toast from "react-hot-toast"
-import {MyTweets, MyLikes, MyRe, MyMedia, FollowBtn} from "../components"
-// import { getUserTweets } from "../api/tweets"
+import {MyTweets, MyLikes, MyRe, MyMedia, FollowBtn, EditProfile, Loader} from "../components"
+import { getUserTweets } from "../api/tweets"
 
 export const UserProfilePage = () => {
     const { username } = useParams()
@@ -21,13 +20,13 @@ export const UserProfilePage = () => {
         queryFn: () => userProfile(username),
     })
 
-    // const { data: tweets, isLoading: loadingTweets, isError: isErrorTweets, error: errorTweets } = useQuery({
-    //     queryFn: () => getUserTweets(username),
-    //     queryKey: ['user_tweets']
-    // })
+    const { data: tweets, isLoading: loadingTweets, isError: isErrorTweets, error: errorTweets } = useQuery({
+        queryFn: () => getUserTweets(username),
+        queryKey: ['user_tweets']
+    })
 
-    // if(loadingTweets) return <div>Loading...</div>
-    // if(isErrorTweets) return <div>Error: {errorTweets.message}</div>
+    if(loadingTweets) return <div>Loading...</div>
+    if(isErrorTweets) return <div>Error: {errorTweets.message}</div>
 
     if (loadingUser ) return <Loader/>
     if (isErrorUser ) return toast.error('Error')
