@@ -13,3 +13,8 @@ export * from './SideBar';
 export * from './MyLikes';
 export * from './AddTweet';
 export * from './EditTweet';
+export * from './Rt';
+export * from './Comments';
+export * from './EditComment';
+export * from './AddComment';
+

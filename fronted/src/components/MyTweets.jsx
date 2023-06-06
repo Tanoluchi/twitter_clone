@@ -2,10 +2,9 @@ import { AiOutlineMessage, AiFillEdit } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { Loader, Like } from "./";
+import { Loader, Like, EditTweet, Rt } from "./";
 import { deleteTweet } from "../api/tweets";
 import { useState } from "react";
-import { EditTweet } from "./";
 
 export const MyTweets = ({ user, myUser, tweets }) => {
 
@@ -58,7 +57,7 @@ export const MyTweets = ({ user, myUser, tweets }) => {
                     </div>
 
             <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-green-500">
-                {/* <Rt t={t} user={userId}/> */}
+                <Rt tweet={t} user={userId}/>
                 <p>
                     {t.retweets_count}
                 </p>

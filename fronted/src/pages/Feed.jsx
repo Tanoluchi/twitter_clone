@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-import { Loader, AddTweet, Like } from "../components";
+import { Loader, AddTweet, Like, Rt } from "../components";
 import { toast } from "react-hot-toast";
 import { AiOutlineMessage } from 'react-icons/ai';
 
@@ -86,7 +86,7 @@ export const Feed = () => {
                                             </div>
 
                                             <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-green-500">
-                                                {/* <Rt t={t}/> */}
+                                                <Rt tweet={tweet}/>
                                                 <p>
                                                     {tweet.retweets_count}
                                                 </p>

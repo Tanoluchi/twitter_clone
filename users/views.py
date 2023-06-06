@@ -9,6 +9,9 @@ from .models import User
 from .serializers import MyTokenObtainPairSerializer, MyUserSerializer, UserSerializer, SearchSerializer
 from .permissions import IsUserOrReadOnly
 
+from notification.models import Notification
+from notification.serializers import NotificationSerializer
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -18,13 +21,20 @@ logger = logging.getLogger(__name__)
 def follow(request, username):
     me = request.user
     user = User.objects.get(username=username)
-    
+
     if user in me.following.all():
         me.following.remove(user)
-        return Response({'detail': 'Unfollowed'}, status=status.HTTP_200_OK)
+        return Response({ 'detail': 'Unfollowed' }, status=status.HTTP_200_OK)
     else:
         me.following.add(user)
-        return Response({'detail': 'Followed'}, status=status.HTTP_200_OK)
+        noti = Notification(
+            type='follow you',
+            to_user=user,
+            from_user=me
+                )
+        noti.save()
+        serializer = NotificationSerializer(noti, many=False)
+        return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

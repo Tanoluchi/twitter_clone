@@ -2,7 +2,7 @@ import { authAxios, axi } from './useAxios';
 import jwt_decode from 'jwt-decode';
 
 export const follow = async (username) => {
-    await authAxios.post(`/users/${username}/follow/`);
+    await authAxios.post(`/users/follow/${username}/`);
 };
 
 export const recommendations = async () => {

@@ -5,7 +5,7 @@ import { userProfile } from "../api/users"
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { IoMdCalendar } from "react-icons/io";
 import toast from "react-hot-toast"
-import {MyTweets, MyLikes, MyRe, MyMedia, FollowBtn, EditProfile, Loader} from "../components"
+import { MyTweets, MyLikes, MyRe, MyMedia, FollowBtn, EditProfile, Loader } from "../components"
 import { getUserTweets } from "../api/tweets"
 
 export const UserProfilePage = () => {
